@@ -5,12 +5,15 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
 var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+var authRouter = require("./routes/api/auth");
+var usersRouter = require("./routes/api/users");
+var productsRouter = require("./routes/api/products");
+
 const connectDB = require("./config/db");
 
 var app = express();
 // Connect Database
-connectDB();
+//connectDB();
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -23,7 +26,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/users", usersRouter);
+app.use("/api/products", productsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
