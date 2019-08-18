@@ -1,6 +1,7 @@
 const { validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const gravatar = require("gravatar");
 
 const User = require("../models/User");
 const config = require("config");
@@ -18,9 +19,16 @@ exports.signup = async (req, res) => {
     if (user) {
       return res.status(400).json({ errors: [{ msg: "User already exists" }] });
     }
+    const avatar = gravatar.url(email, {
+      s: "200",
+      r: "pg",
+      d: "mm"
+    });
+
     user = new User({
       name,
       email,
+      avatar,
       password
     });
 
