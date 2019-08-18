@@ -1,19 +1,30 @@
 var express = require("express");
 var router = express.Router();
+const { check, validationResult } = require("express-validator");
 
-const controller = require("../../conrollers/users");
+const usersController = require("../../conrollers/users");
 
 // @route  POST api/users
 // @desc   Register user
 // @access Public
-router.post("/", (req, res) => {
-  console.log(req.body);
-  res.send("Users route");
-});
+router.post(
+  "/",
+  [
+    check("name", "Name is required")
+      .not()
+      .isEmpty(),
+    check("email", "Please include a valid email").isEmail(),
+    check(
+      "password",
+      "Please enter a password with 6 or more characters"
+    ).isLength({ min: 6 })
+  ],
+  usersController.signup
+);
 
 // /* GET users listing. */
 // router.get("/", function(req, res, next) {
 //   res.send("respond with a resource");
 // });
-//router.get("/:userName", controller.get());
+//router.get("/:userName", usersController.get());
 module.exports = router;
