@@ -7,7 +7,7 @@ const auth = require("../../middleware/auth");
 // @route  GET api/profile/me
 // @desc   Get current user profile
 // @access Private
-router.get("/me", auth, profileController.getCurrentPrfile);
+router.get("/me", auth, profileController.getCurrentProfile);
 
 // @route  GET api/profile
 // @desc   Test route
