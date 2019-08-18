@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
-const controller = require("../../conrollers/auth");
+const controller = require("../../controllers/auth");
 
 // @route  GET api/auth
 // @desc   Test route
