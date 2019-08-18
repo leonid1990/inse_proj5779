@@ -13,7 +13,7 @@ const connectDB = require("./config/db");
 
 var app = express();
 // Connect Database
-//connectDB();
+connectDB();
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));

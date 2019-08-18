@@ -9,6 +9,7 @@
     "dev": "concurrently \"npm run backend\" \"npm run frontend\""
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "config": "^3.2.2",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
