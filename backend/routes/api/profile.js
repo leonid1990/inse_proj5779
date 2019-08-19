@@ -30,6 +30,11 @@ router.post(
 // @access   Public
 router.get("/", profileController.getAllProfiles);
 
+// @route    GET api/profile/user/:user_id
+// @desc     Get profile by user ID
+// @access   Public
+router.get("/user/:user_id", profileController.getProfileByUserId);
+
 // @route  GET api/profile
 // @desc   Test route
 // @access Public

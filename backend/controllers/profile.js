@@ -6,8 +6,8 @@ const User = require("../models/User");
 exports.getCurrentProfile = async (req, res) => {
   try {
     const profile = await Profile.findOne({ user: req.user.id }).populate(
-      "name",
-      ["name"]
+      "user",
+      ["name", "avatar"]
     );
 
     if (!profile) {
@@ -62,6 +62,24 @@ exports.getAllProfiles = async (req, res) => {
     res.json(profiles);
   } catch (err) {
     console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+};
+
+exports.getProfileByUserId = async (req, res) => {
+  try {
+    const profile = await Profile.findOne({
+      user: req.params.user_id
+    }).populate("user", ["name", "avatar"]);
+
+    if (!profile) return res.status(400).json({ msg: "Profile not found" });
+
+    res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind == "ObjectId") {
+      return res.status(400).json({ msg: "Profile not found" });
+    }
     res.status(500).send("Server Error");
   }
 };
