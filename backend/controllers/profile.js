@@ -6,8 +6,8 @@ const User = require("../models/User");
 exports.getCurrentProfile = async (req, res) => {
   try {
     const profile = await Profile.findOne({ user: req.user.id }).populate(
-      "user",
-      ["name", "avatar"]
+      "name",
+      ["name"]
     );
 
     if (!profile) {
@@ -30,6 +30,7 @@ exports.updateUserProfile = async (req, res) => {
   const { status } = req.body;
 
   const profileFields = {};
+  profileFields.user = req.user.id;
   if (status) profileFields.status = status;
 
   try {
@@ -49,6 +50,16 @@ exports.updateUserProfile = async (req, res) => {
 
     await profile.save();
     res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+};
+
+exports.getAllProfiles = async (req, res) => {
+  try {
+    const profiles = await Profile.find().populate("user", ["name", "avatar"]);
+    res.json(profiles);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

@@ -25,6 +25,11 @@ router.post(
   profileController.updateUserProfile
 );
 
+// @route    GET api/profile
+// @desc     Get all profiles
+// @access   Public
+router.get("/", profileController.getAllProfiles);
+
 // @route  GET api/profile
 // @desc   Test route
 // @access Public
