@@ -132,7 +132,7 @@ exports.unlikePost = async (req, res) => {
   }
 };
 
-exports.createCommnt = async (req, res) => {
+exports.createComment = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
