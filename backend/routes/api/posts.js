@@ -46,6 +46,22 @@ router.put("/like/:id", auth, postController.likePost);
 // @access   Private
 router.put("/unlike/:id", auth, postController.unlikePost);
 
+// @route    POST api/posts/comment/:id
+// @desc     Comment on a post
+// @access   Private
+router.post(
+  "/comment/:id",
+  [
+    auth,
+    [
+      check("text", "Text is required")
+        .not()
+        .isEmpty()
+    ]
+  ],
+  postController.createCommnt
+);
+
 // @route  GET api/posts
 // @desc   Test route
 // @access Public
