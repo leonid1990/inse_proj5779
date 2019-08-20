@@ -31,6 +31,11 @@ router.get("/", auth, postController.getAllPosts);
 // @access   Private
 router.get("/:id", auth, postController.getPostById);
 
+// @route    DELETE api/posts/:id
+// @desc     Delete a post
+// @access   Private
+router.delete("/:id", auth, postController.deletePostById);
+
 // @route  GET api/posts
 // @desc   Test route
 // @access Public
