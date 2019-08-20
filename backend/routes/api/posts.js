@@ -62,6 +62,11 @@ router.post(
   postController.createCommnt
 );
 
+// @route    DELETE api/posts/comment/:id/:comment_id
+// @desc     Delete comment
+// @access   Private
+router.delete("/comment/:id/:comment_id", auth, postController.deletePost);
+
 // @route  GET api/posts
 // @desc   Test route
 // @access Public
