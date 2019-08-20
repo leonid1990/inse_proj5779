@@ -36,6 +36,16 @@ router.get("/:id", auth, postController.getPostById);
 // @access   Private
 router.delete("/:id", auth, postController.deletePostById);
 
+// @route    PUT api/posts/like/:id
+// @desc     Like a post
+// @access   Private
+router.put("/like/:id", auth, postController.likePost);
+
+// @route    PUT api/posts/unlike/:id
+// @desc     Unlike a post
+// @access   Private
+router.put("/unlike/:id", auth, postController.unlikePost);
+
 // @route  GET api/posts
 // @desc   Test route
 // @access Public
