@@ -59,7 +59,7 @@ router.post(
         .isEmpty()
     ]
   ],
-  postController.createCommnt
+  postController.createComment
 );
 
 // @route    DELETE api/posts/comment/:id/:comment_id
