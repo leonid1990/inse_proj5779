@@ -21,6 +21,16 @@ router.post(
   postController.createPost
 );
 
+// @route    GET api/posts
+// @desc     Get all posts
+// @access   Private
+router.get("/", auth, postController.getAllPosts);
+
+// @route    GET api/posts/:id
+// @desc     Get post by ID
+// @access   Private
+router.get("/:id", auth, postController.getPostById);
+
 // @route  GET api/posts
 // @desc   Test route
 // @access Public
