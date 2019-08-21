@@ -7,6 +7,10 @@ exports.createProduct = async (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
+  // Check user
+  if (!req.user.isAdmin) {
+    return res.status(401).json({ msg: "User not authorized" });
+  }
 
   try {
     const newProduct = new Product({
