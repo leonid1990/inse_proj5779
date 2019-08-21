@@ -34,6 +34,11 @@ router.post(
   productController.createProduct
 );
 
+// @route    GET api/products
+// @desc     Get all products
+// @access   Public
+router.get("/", productController.getAllProducts);
+
 // @route  GET api/products
 // @desc   Test route
 // @access Public
