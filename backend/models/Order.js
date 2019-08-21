@@ -11,7 +11,7 @@ const Order = new Schema({
   },
   details: [
     {
-      products: {
+      product: {
         type: Schema.Types.ObjectId,
         ref: "product"
       },
