@@ -13,7 +13,8 @@ const Order = new Schema({
     {
       product: {
         type: Schema.Types.ObjectId,
-        ref: "product"
+        ref: "product",
+        required: true
       },
       name: {
         type: String
@@ -24,6 +25,10 @@ const Order = new Schema({
       }
     }
   ],
+  address: {
+    type: String,
+    required: true
+  },
   date: {
     type: Date,
     default: Date.now
