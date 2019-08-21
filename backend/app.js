@@ -8,6 +8,7 @@ var indexRouter = require("./routes/index");
 var authRouter = require("./routes/api/auth");
 var usersRouter = require("./routes/api/users");
 var productsRouter = require("./routes/api/products");
+var ordersRouter = require("./routes/api/orders");
 var postsRouter = require("./routes/api/posts");
 var profileRouter = require("./routes/api/profile");
 
@@ -31,6 +32,7 @@ app.use("/", indexRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/products", productsRouter);
+app.use("/api/orders", ordersRouter);
 app.use("/api/posts", postsRouter);
 app.use("/api/profile", profileRouter);
 
