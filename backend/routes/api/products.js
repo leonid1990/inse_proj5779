@@ -44,6 +44,11 @@ router.get("/", productController.getAllProducts);
 // @access   Public
 router.get("/:id", productController.getProductById);
 
+// @route    DELETE api/products/:id
+// @desc     Delete a product
+// @access   Private
+router.delete("/:id", auth, productController.deleteProductById);
+
 // @route  GET api/products
 // @desc   Test route
 // @access Public
