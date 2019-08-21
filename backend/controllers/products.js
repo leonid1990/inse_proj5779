@@ -39,3 +39,21 @@ exports.getAllProducts = async (req, res) => {
     res.status(500).send("Server Error");
   }
 };
+
+exports.getProductById = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+
+    if (!product) {
+      return res.status(404).json({ msg: "Product not found" });
+    }
+
+    res.json(product);
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind === "ObjectId") {
+      return res.status(404).json({ msg: "Product not found" });
+    }
+    res.status(500).send("Server Error");
+  }
+};

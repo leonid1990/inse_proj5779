@@ -39,6 +39,11 @@ router.post(
 // @access   Public
 router.get("/", productController.getAllProducts);
 
+// @route    GET api/products/:id
+// @desc     Get product by ID
+// @access   Public
+router.get("/:id", productController.getProductById);
+
 // @route  GET api/products
 // @desc   Test route
 // @access Public
