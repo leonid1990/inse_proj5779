@@ -27,9 +27,19 @@ exports.createOrder = async (req, res) => {
 
     const order = await newOrder.save();
 
-    res.json("order");
+    res.json(order);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
   }
 };
+
+// exports.getAllOrders = async (req, res) => {
+//   try {
+//     const orders = await Post.find().sort({ date: -1 });
+//     res.json(posts);
+//   } catch (err) {
+//     console.error(err.message);
+//     res.status(500).send("Server Error");
+//   }
+// };
