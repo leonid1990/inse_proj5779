@@ -33,4 +33,9 @@ router.post(
   orderController.createOrder
 );
 
+// @route    GET api/orders
+// @desc     Get all orders
+// @access   Private
+router.get("/", auth, orderController.getAllOrders);
+
 module.exports = router;
