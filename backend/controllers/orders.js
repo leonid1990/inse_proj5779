@@ -69,3 +69,28 @@ exports.getOrderById = async (req, res) => {
     res.status(500).send("Server Error");
   }
 };
+
+exports.deleteOrderById = async (req, res) => {
+  try {
+    const order = await Order.findById(req.params.id);
+
+    if (!order) {
+      return res.status(404).json({ msg: "Order not found" });
+    }
+
+    // Check user
+    if (!req.user.isAdmin && order.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: "User not authorized" });
+    }
+
+    await order.remove();
+
+    res.json({ msg: "Order removed" });
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind === "ObjectId") {
+      return res.status(404).json({ msg: "Order not found" });
+    }
+    res.status(500).send("Server Error");
+  }
+};
