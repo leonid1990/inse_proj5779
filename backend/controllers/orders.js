@@ -19,8 +19,7 @@ exports.createOrder = async (req, res) => {
     }
 
     const newOrder = new Order({
-      user: req.body.user,
-      name: user.name,
+      user: req.user.id,
       details: req.body.details,
       address: req.body.address
     });
@@ -40,7 +39,9 @@ exports.getAllOrders = async (req, res) => {
     return res.status(401).json({ msg: "User not authorized" });
   }
   try {
-    const orders = await Order.find().sort({ date: -1 });
+    const orders = await Order.find()
+      .populate("user", ["name"])
+      .sort({ date: -1 });
     res.json(orders);
   } catch (err) {
     console.error(err.message);
@@ -49,15 +50,15 @@ exports.getAllOrders = async (req, res) => {
 };
 
 exports.getOrderById = async (req, res) => {
-  // Check user
-  if (!req.user.isAdmin && order.user.toString() !== req.user.id) {
-    return res.status(401).json({ msg: "User not authorized" });
-  }
   try {
     const order = await Order.findById(req.params.id);
-
     if (!order) {
       return res.status(404).json({ msg: "Order not found" });
+    }
+
+    // Check user
+    if (!req.user.isAdmin && order.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: "User not authorized" });
     }
 
     res.json(order);
@@ -71,10 +72,6 @@ exports.getOrderById = async (req, res) => {
 };
 
 exports.deleteOrderById = async (req, res) => {
-  // Check user
-  if (!req.user.isAdmin && order.user.toString() !== req.user.id) {
-    return res.status(401).json({ msg: "User not authorized" });
-  }
   try {
     const order = await Order.findById(req.params.id);
 
@@ -82,6 +79,10 @@ exports.deleteOrderById = async (req, res) => {
       return res.status(404).json({ msg: "Order not found" });
     }
 
+    // Check user
+    if (!req.user.isAdmin && order.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: "User not authorized" });
+    }
     await order.remove();
 
     res.json({ msg: "Order removed" });
