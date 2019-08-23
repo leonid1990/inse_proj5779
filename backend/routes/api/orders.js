@@ -38,4 +38,9 @@ router.post(
 // @access   Private
 router.get("/", auth, orderController.getAllOrders);
 
+// @route    GET api/orders/:id
+// @desc     Get order by ID
+// @access   Private
+router.get("/:id", auth, orderController.getOrderById);
+
 module.exports = router;
