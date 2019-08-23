@@ -82,3 +82,42 @@ exports.deleteProductById = async (req, res) => {
     res.status(500).send("Server Error");
   }
 };
+
+exports.updateProduct = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  // Check user
+  if (!req.user.isAdmin) {
+    return res.status(401).json({ msg: "User not authorized" });
+  }
+
+  const { title, sku, price, currencyFormat, quantity } = req.body;
+
+  const productFields = {};
+  productFields.product = req.params.id;
+  if (title) productFields.title = title;
+  if (sku) productFields.sku = sku;
+  if (price) productFields.price = price;
+  if (currencyFormat) productFields.currencyFormat = currencyFormat;
+  if (quantity) productFields.quantity = quantity;
+
+  try {
+    let product = await Product.findById(req.params.id);
+    if (product) {
+      // Update
+      product = await Product.findOneAndUpdate(
+        { _id: req.params.id },
+        { $set: productFields },
+        { new: true, upsert: true }
+      );
+
+      await product.save();
+      res.json(product);
+    }
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+};

@@ -44,6 +44,35 @@ router.get("/", productController.getAllProducts);
 // @access   Public
 router.get("/:id", productController.getProductById);
 
+// @route    POST api/products/:id
+// @desc     Update a product
+// @access   Private
+router.post(
+  "/:id",
+  [
+    auth,
+    [
+      check("title", "title is required")
+        .not()
+        .isEmpty(),
+      check("sku", "sku is required")
+        .not()
+        .isEmpty(),
+      check("price", "price is required")
+        .not()
+        .isEmpty(),
+      check("currencyFormat", "price is required")
+        .not()
+        .isEmpty(),
+      check("quantity", "price is required")
+        .not()
+        .isEmpty()
+    ]
+  ],
+
+  productController.updateProduct
+);
+
 // @route    DELETE api/products/:id
 // @desc     Delete a product
 // @access   Private
