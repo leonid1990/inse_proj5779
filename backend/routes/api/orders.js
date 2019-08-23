@@ -46,6 +46,6 @@ router.get("/:id", auth, orderController.getOrderById);
 // @route    DELETE api/orders/:id
 // @desc     Delete an order
 // @access   Private
-router.delete("/:id", auth, orderController.deleteOderById);
+router.delete("/:id", auth, orderController.deleteOrderById);
 
 module.exports = router;
