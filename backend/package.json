@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "backend": "nodemon ./bin/www",
-    "frontend": "npm run start --prefix frontend",
+    "frontend": "npm run start --prefix ../frontend",
     "dev": "concurrently \"npm run backend\" \"npm run frontend\""
   },
   "dependencies": {
