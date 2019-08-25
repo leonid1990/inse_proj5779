@@ -8,7 +8,7 @@ const Navbar = () => {
       </h1>
       <ul>
         <li>
-          <a href='profiles.html'>Developers</a>
+          <a href='profiles.html'>Paintings</a>
         </li>
         <li>
           <a href='register.html'>Register</a>
