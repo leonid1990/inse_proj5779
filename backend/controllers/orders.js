@@ -13,9 +13,8 @@ exports.createOrder = async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
     for (const item of req.body.details) {
-      await Product.findById(item.product, (err, product) => {
-        item.title = product.title;
-      });
+      const product = await Product.findById(item.product);
+      item.title = product.title;
     }
 
     const newOrder = new Order({
